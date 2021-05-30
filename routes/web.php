@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Livewire\Products\Show as ShowProduct;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,9 +19,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/products', function () {
+    return view('products');
+})->middleware(['auth'])->name('products');
 
+Route::get('/products/{product}', ShowProduct::class)->middleware(['auth'])->name('product');
 
 require __DIR__.'/auth.php';

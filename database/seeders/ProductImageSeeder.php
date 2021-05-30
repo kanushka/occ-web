@@ -14,7 +14,7 @@ class ProductImageSeeder extends Seeder
     public function run()
     {
         \App\Models\ProductImage::factory()
-            ->count(20)
+            ->count(400)
             ->create();
     }
 }

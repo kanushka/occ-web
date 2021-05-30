@@ -22,7 +22,7 @@ class ProductImageFactory extends Factory
     public function definition()
     {
         return [
-            'product_id' => $this->faker->numberBetween(1,10),
+            'product_id' => $this->faker->numberBetween(1,100),
             'url' => $this->faker->imageUrl(360, 360, 'house', true, 'home'),
             'created_at' => now(),
         ];
