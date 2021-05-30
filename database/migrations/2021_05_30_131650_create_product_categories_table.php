@@ -15,6 +15,8 @@ class CreateProductCategoriesTable extends Migration
     {
         Schema::create('product_categories', function (Blueprint $table) {
             $table->id();
+            $table->enum('type', ['plan', 'hardware']);
+            $table->string('title');
             $table->timestamps();
         });
     }

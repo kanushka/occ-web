@@ -22,7 +22,9 @@ class ProductCategoryFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title' => $this->faker->word(),
+            'type' => $this->faker->randomDigit()%2 == 0 ? 'plan' : 'hardware',
+            'created_at' => now(),
         ];
     }
 }
