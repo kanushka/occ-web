@@ -4,15 +4,17 @@ namespace App\Http\Livewire\Products;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\Product;
 use App\Models\ProductCategory;
 
-class Create extends Component
+class Edit extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, AuthorizesRequests;
 
     public Product $product;
     public $photos = [];
+    public $showDeleteModel = false;
 
     protected $rules = [
         'product.title' => 'required|string|min:6',
@@ -22,14 +24,14 @@ class Create extends Component
         'photos.*' => 'image|max:10240',
     ];
 
-    public function mount()
+    public function mount(Product $product)
     {
-        $this->product = new Product;
+        $this->product = $product;
     }
 
-    public function save()
+    public function update()
     {
-        $this->authorize('create');
+        $this->authorize('update', $this->product);
 
         $this->validate();
 
@@ -44,14 +46,28 @@ class Create extends Component
             ]);
         }
 
-        $this->emit('productAdded', $this->product->id);
+        $this->emit('productUpdated', $this->product->id);
+
+        return redirect()->route('products');
+    }
+
+    public function delete()
+    {
+        $this->authorize('forceDelete', $this->product);
+        $tempProduct = $this->product;
+
+        // delete product
+        $this->product->images()->forceDelete();
+        $this->product->forceDelete();
+
+        $this->emit('productDeleted', $tempProduct->id);
 
         return redirect()->route('products');
     }
 
     public function render()
     {
-        return view('livewire.products.create', [
+        return view('livewire.products.edit', [
             'categories' => ProductCategory::all()
         ])->layout('layouts.app');
     }

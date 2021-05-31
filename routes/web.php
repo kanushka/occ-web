@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Livewire\Products\Show as ShowProduct;
 use App\Http\Livewire\Products\Create as CreateProduct;
+use App\Http\Livewire\Products\Edit as EditProduct;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,5 +28,6 @@ Route::get('/products', function () {
 
 Route::get('/products/{product}/details', ShowProduct::class)->name('product.show');
 Route::get('/products/create', CreateProduct::class)->name('product.create');
+Route::get('/products/{product}/edit', EditProduct::class)->name('product.edit');
 
 require __DIR__.'/auth.php';

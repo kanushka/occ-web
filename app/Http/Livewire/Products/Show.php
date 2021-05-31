@@ -24,7 +24,7 @@ class Show extends Component
 
     public function editProduct()
     {
-        return redirect()->route('product.create', $this->product);
+        return redirect()->route('product.edit', $this->product);
     }
 
     public function render()
