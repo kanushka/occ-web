@@ -7,6 +7,11 @@ module.exports = {
         './resources/views/**/*.blade.php',
     ],
 
+    plugins: [
+        // ...
+        require('@tailwindcss/forms'),
+    ],
+
     theme: {
         extend: {
             fontFamily: {

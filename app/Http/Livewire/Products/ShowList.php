@@ -20,6 +20,7 @@ class ShowList extends Component
     {
         return view('livewire.products.show-list', [
             'products' => Product::where('title', 'like', "%{$this->search}%")
+                ->orderBy('created_at', 'desc')
                 ->paginate(20)
         ]);
     }

@@ -42,6 +42,10 @@
                             <div class="flex-auto flex space-x-3">
                                 <button class="w-1/2 flex items-center justify-center rounded-md bg-black text-white"
                                     type="submit">Add to bag</button>
+                                @can('update', $product)                                    
+                                <button class="w-1/2 flex items-center justify-center rounded-md border border-gray-300"
+                                    type="button" wire:click="editProduct">Edit product</button>
+                                @endcan
                             </div>
                             <button
                                 class="flex-none flex items-center justify-center w-9 h-9 rounded-md text-gray-400 border border-gray-300"
