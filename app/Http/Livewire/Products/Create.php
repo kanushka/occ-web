@@ -4,12 +4,13 @@ namespace App\Http\Livewire\Products;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\Product;
 use App\Models\ProductCategory;
 
 class Create extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, AuthorizesRequests;
 
     public Product $product;
     public $photos = [];
