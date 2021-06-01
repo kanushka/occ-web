@@ -30,7 +30,7 @@ class Create extends Component
 
     public function save()
     {
-        $this->authorize('create');
+        $this->authorize('create', Product::class);
 
         $this->validate();
 
