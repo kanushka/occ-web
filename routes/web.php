@@ -26,7 +26,13 @@ Route::get('/products', function () {
 })->name('products');
 
 Route::get('/products/{product}/details', ShowProduct::class)->name('product.show');
-Route::get('/products/create', CreateProduct::class)->name('product.create');
-Route::get('/products/{product}/edit', EditProduct::class)->name('product.edit');
+
+Route::get('/products/create', CreateProduct::class)
+    ->middleware('can:create,App\Models\Product')
+    ->name('product.create');
+
+Route::get('/products/{product}/edit', EditProduct::class)
+    ->middleware('can:update,product')
+    ->name('product.edit');
 
 require __DIR__.'/auth.php';
