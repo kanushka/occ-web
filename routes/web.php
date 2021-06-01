@@ -18,8 +18,7 @@ use App\Http\Livewire\Products\Edit as EditProduct;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-    // return view('products');
+    return view('products');
 });
 
 Route::get('/products', function () {
