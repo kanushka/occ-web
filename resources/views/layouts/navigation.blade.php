@@ -87,17 +87,17 @@
                 {{ __('Products') }}
             </x-responsive-nav-link>
         </div>
-
+        
         @guest                
-        <div class="flex">
-            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">                    
-                <x-nav-link :href="route('login')">
-                    Log in
-                </x-nav-link>
-                <x-nav-link :href="route('register')">
-                    Register
-                </x-nav-link>
-            </div>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                Log in
+            </x-responsive-nav-link>
+        </div>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                Register
+            </x-responsive-nav-link>
         </div>
         @endguest
 

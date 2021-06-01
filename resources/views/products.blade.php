@@ -5,15 +5,15 @@
         </h2>
     </x-slot>
 
-    <div style="position: absolute;
+    {{-- <div style="position: absolute;
     top: 10%;
     right: 10%;
     width: 44%;">        
         <img src="{{asset('images/home.svg')}}">
-    </div>
+    </div> --}}
 
-    <div class="mt-96">
+    {{-- <div class="mt-96"> --}}
         @livewire('products.show-list')
-    </div>
+    {{-- </div> --}}
 
 </x-app-layout>
