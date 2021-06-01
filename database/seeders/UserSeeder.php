@@ -15,8 +15,9 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert(
+        DB::table('users')->insertOrIgnore(
             [
+                'id' => 1001,
                 'name' => 'Ishini Devindi',
                 'role' => 'admin',
                 'email' => 'ishini@mail.com',

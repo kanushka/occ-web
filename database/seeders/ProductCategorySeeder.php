@@ -14,7 +14,7 @@ class ProductCategorySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('product_categories')->insert(
+        DB::table('product_categories')->insertOrIgnore([
             [
                 'id' => 21,
                 'type' => 'plan',
@@ -56,7 +56,7 @@ class ProductCategorySeeder extends Seeder
                 'type' => 'hardware',
                 'title' => 'roof',
                 'created_at' => now(),
-            ],
-        );
+            ]
+        ]);
     }
 }
