@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Products;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 
 class Show extends Component
@@ -25,6 +26,15 @@ class Show extends Component
     public function editProduct()
     {
         return redirect()->route('product.edit', $this->product);
+    }
+
+    public function addToCart()
+    {
+        $this->product->cart()->create([
+            'user_id' => Auth::id()
+        ]);
+
+        $this->emit('cartUpdated');
     }
 
     public function render()

@@ -9,7 +9,7 @@
                     {{ $product->title }}
                 </h1>
                 <div class="text-xl font-semibold text-gray-500">
-                    LKR {{ $product->price }}
+                    LKR {{ number_format($product->price, 2) }}
                 </div>
                 <div class="w-full flex-none text-sm font-medium text-gray-500 mt-2">
                     In stock
@@ -19,7 +19,7 @@
             <div class="flex space-x-3 text-sm font-medium">
                 <div class="flex-auto flex space-x-3">
                     <button class="w-1/2 flex items-center justify-center rounded-md bg-black text-white"
-                        type="submit">Add to bag</button>
+                        type="button" wire:click="addToCart">Add to bag</button>
                     <button class="w-1/2 flex items-center justify-center rounded-md border border-gray-300"
                         type="button" wire:click="viewProduct">View more</button>
                 </div>

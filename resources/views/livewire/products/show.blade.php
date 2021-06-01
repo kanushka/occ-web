@@ -1,18 +1,13 @@
 <div>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ $product->title }}
-        </h2>
-    </x-slot>
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-16">
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 sm:px-8 sm:py-12 sm:gap-x-8 md:py-16">
                     <div
                         class="relative z-10 col-start-1 row-start-1 px-4 pt-40 pb-3 bg-gradient-to-t from-black sm:bg-none">
-                        <p class="text-sm font-medium text-white sm:mb-1 sm:text-gray-500">{{ $product->category->type }} | {{ $product->category->title }}</p>
+                        <p class="text-sm font-medium text-white sm:mb-1 sm:text-gray-500">
+                            {{ $product->category->type }} | {{ $product->category->title }}</p>
                         <h2 class="text-xl font-semibold text-white sm:text-2xl sm:leading-7 sm:text-black md:text-3xl">
                             {{ $product->title }}</h2>
                     </div>
@@ -32,7 +27,7 @@
                     <div class="col-start-1 row-start-3 space-y-3 px-4">
                         <div class="flex flex-wrap">
                             <div class="text-xl font-semibold text-gray-500">
-                                LKR {{ $product->price }}
+                                LKR {{ number_format($product->price, 2) }}
                             </div>
                             <div class="w-full flex-none text-sm font-medium text-gray-500 mt-2">
                                 In stock
@@ -41,10 +36,10 @@
                         <div class="flex space-x-3 mb-4 text-sm font-medium">
                             <div class="flex-auto flex space-x-3">
                                 <button class="w-1/2 flex items-center justify-center rounded-md bg-black text-white"
-                                    type="submit">Add to bag</button>
-                                @can('update', $product)                                    
-                                <button class="w-1/2 flex items-center justify-center rounded-md border border-gray-300"
-                                    type="button" wire:click="editProduct">Edit product</button>
+                                    type="button" wire:click="addToCart">Add to bag</button>
+                                @can('update', $product)
+                                    <button class="w-1/2 flex items-center justify-center rounded-md border border-gray-300"
+                                        type="button" wire:click="editProduct">Edit product</button>
                                 @endcan
                             </div>
                             <button
@@ -79,10 +74,9 @@
                     </div>
                 </div>
                 <div class="grid grid-cols-1 sm:px-8 sm:py-12 sm:gap-x-8 md:py-16">
-                    {{$product->description}}
+                    {{ $product->description }}
                 </div>
             </div>
-        </div>  
+        </div>
     </div>
-
 </div>

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Products\Show as ShowProduct;
 use App\Http\Livewire\Products\Create as CreateProduct;
 use App\Http\Livewire\Products\Edit as EditProduct;
+use App\Http\Livewire\ShowCart;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,11 +29,15 @@ Route::get('/products', function () {
 Route::get('/products/{product}/details', ShowProduct::class)->name('product.show');
 
 Route::get('/products/create', CreateProduct::class)
-    ->middleware('can:create,App\Models\Product')
+    ->middleware(['auth', 'can:create,App\Models\Product'])
     ->name('product.create');
 
 Route::get('/products/{product}/edit', EditProduct::class)
-    ->middleware('can:create,App\Models\Product')
+->middleware(['auth', 'can:create,App\Models\Product'])
     ->name('product.edit');
+
+Route::get('/products/bag', ShowCart::class)
+    ->middleware('auth')
+    ->name('cart.show');
 
 require __DIR__.'/auth.php';

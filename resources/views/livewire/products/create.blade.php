@@ -1,17 +1,11 @@
 <div>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Add Product
-        </h2>
-    </x-slot>
-
-    <div class="container mx-auto max-w-4xl">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="grid">
-            <div class="mt-5">
+            <div class="mt-24">
                 <div class="px-4 sm:px-0">
-                    <h3 class="text-lg font-medium leading-6 text-gray-900">Add Product</h3>
+                    <h3 class="text-lg font-medium leading-6 text-gray-900 font-semibold">Add Product</h3>
                     <p class="mt-1 text-sm text-gray-600">
-                        This information will be displayed publicly so be careful what you share.
+                        This product information will be displayed publicly so be careful what you share.
                     </p>
                 </div>
             </div>

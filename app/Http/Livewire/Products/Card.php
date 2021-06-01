@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Products;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 
 class Card extends Component
@@ -21,6 +22,15 @@ class Card extends Component
     public function viewProduct()
     {
         return redirect()->route('product.show', $this->product);
+    }
+
+    public function addToCart()
+    {
+        $this->product->cart()->create([
+            'user_id' => Auth::id()
+        ]);
+
+        $this->emit('cartUpdated');
     }
 
     public function render()

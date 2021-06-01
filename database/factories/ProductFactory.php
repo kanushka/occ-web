@@ -25,7 +25,7 @@ class ProductFactory extends Factory
             'title' => $this->faker->streetName(),
             'description' => $this->faker->realTextBetween(200, 500, 2),
             'price' => $this->faker->numberBetween(1000,5000),
-            'product_category_id' => $this->faker->numberBetween(1,4),
+            'product_category_id' => $this->faker->numberBetween(21,27),
             'created_at' => now(),
         ];
     }
