@@ -32,7 +32,7 @@ Route::get('/products/create', CreateProduct::class)
     ->name('product.create');
 
 Route::get('/products/{product}/edit', EditProduct::class)
-    ->middleware('can:update,product')
+    ->middleware('can:create,App\Models\Product')
     ->name('product.edit');
 
 require __DIR__.'/auth.php';
