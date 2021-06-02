@@ -7,6 +7,4 @@
 
     @livewire('products.show-list')
 
-    @livewire('alert')
-
 </x-app-layout>

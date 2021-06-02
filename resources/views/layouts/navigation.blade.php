@@ -33,9 +33,10 @@
 
             <!-- Settings Dropdown -->
             @auth
-            
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
-                    <div class="w-7 mr-6">
+
+                <div class="hidden sm:flex sm:items-center sm:ml-6">
+                        @livewire('cart-badge')
+                    <div class="w-6 ml-1 mr-6">
                         <a href="{{ route('cart.show') }}">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
@@ -66,13 +67,16 @@
                                 <x-dropdown-link :href="route('product.create')">
                                     Add Product
                                 </x-dropdown-link>
-                            @endcan
+                                @endcan
+                                <x-dropdown-link :href="route('orders')">
+                                    My Orders
+                                </x-dropdown-link>
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
 
                                 <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
-                                                        this.closest('form').submit();">
+                                                            this.closest('form').submit();">
                                     {{ __('Log Out') }}
                                 </x-dropdown-link>
                             </form>
@@ -140,7 +144,7 @@
                         @csrf
 
                         <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
-                                                this.closest('form').submit();">
+                                                    this.closest('form').submit();">
                             {{ __('Log Out') }}
                         </x-responsive-nav-link>
                     </form>
