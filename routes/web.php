@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Livewire\Products\ShowList as ShowAllProduct;
 use App\Http\Livewire\Products\Show as ShowProduct;
 use App\Http\Livewire\Products\Create as CreateProduct;
 use App\Http\Livewire\Products\Edit as EditProduct;
@@ -19,13 +20,10 @@ use App\Http\Livewire\Orders\ShowList as ShowOrders;
 |
 */
 
-Route::get('/', function () {
-    return view('products');
-});
+Route::redirect('/', '/products');
 
-Route::get('/products', function () {
-    return view('products');
-})->name('products');
+Route::get('/products', ShowAllProduct::class)->name('products');
+Route::get('/product', ShowAllProduct::class)->name('hardware');
 
 Route::get('/products/{product}/details', ShowProduct::class)->name('product.show');
 
@@ -34,7 +32,7 @@ Route::get('/products/create', CreateProduct::class)
     ->name('product.create');
 
 Route::get('/products/{product}/edit', EditProduct::class)
-->middleware(['auth', 'can:create,App\Models\Product'])
+    ->middleware(['auth', 'can:create,App\Models\Product'])
     ->name('product.edit');
 
 Route::get('/products/bag', ShowCart::class)

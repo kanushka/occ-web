@@ -12,8 +12,13 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('products')" :active="request()->routeIs('products')">
-                        {{ __('Products') }}
+                    <x-nav-link :href="route('products', ['type'=>'plan'])" :active="request()->routeIs('products')">
+                        Our Plans
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('hardware', ['type'=>'hardware'])" :active="request()->routeIs('hardware')">
+                        Hardware Items
                     </x-nav-link>
                 </div>
             </div>
