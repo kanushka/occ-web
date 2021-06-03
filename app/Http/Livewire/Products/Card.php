@@ -9,7 +9,6 @@ use App\Models\Product;
 
 class Card extends Component
 {
-
     public Product $product;
     public $defaultImage;
 
@@ -26,6 +25,10 @@ class Card extends Component
 
     public function addToCart()
     {
+        if(!Auth::id()){
+            return redirect()->route('login');
+        }
+
         $this->product->cart()->create([
             'user_id' => Auth::id()
         ]);
