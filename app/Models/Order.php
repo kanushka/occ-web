@@ -11,7 +11,7 @@ class Order extends Model
 {
     use HasFactory;
 
-    public function cart()
+    public function cartItems()
     {
         return $this->hasMany(Cart::class);
     }
@@ -23,6 +23,6 @@ class Order extends Model
 
     public function payments()
     {
-        return $this->belongsTo(Payment::class);
+        return $this->hasMany(Payment::class);
     }
 }

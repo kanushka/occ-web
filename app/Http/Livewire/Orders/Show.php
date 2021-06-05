@@ -2,25 +2,28 @@
 
 namespace App\Http\Livewire\Orders;
 
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use App\Models\Cart;
 use App\Models\Order;
-use App\Models\User;
 
-class Checkout extends Component
+class Show extends Component
 {
     public Order $order;
-    public User $user;
     public $cartItems;
+    public $user;
+    public $tax = 100;
 
     public function mount(Order $order)
     {
+        $this->user = Auth::user();
         $this->order = $order;
-        $this->user = $order->user;
         $this->cartItems = $order->cartItems;
     }
 
     public function render()
     {
-        return view('livewire.orders.checkout');
+        return view('livewire.orders.show')
+            ->layout('layouts.app');
     }
 }

@@ -15,8 +15,10 @@
                         <table class="w-full font-medium leading-6 text-gray-900 font-semibold" cellspacing="0">
                             <thead>
                                 <tr class="h-12">
+                                    <th class="text-left">Order Id</th>
                                     <th class="text-left">Product</th>
                                     <th class="hidden text-right md:table-cell">Price</th>
+                                    <th class="text-center">Method</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Ordered at</th>
                                 </tr>
@@ -24,6 +26,11 @@
                             <tbody>
                                 @foreach ($carts as $cart)
                                     <tr>
+                                        <td>
+                                            <a href="{{ route('orders.show', $cart->order->id) }}">
+                                                <p class="mb-4">#{{ $cart->order->id }}</p>
+                                            </a>
+                                        </td>
                                         <td>
                                             <a href="{{ route('product.show', $cart->product_id) }}">
                                                 <p class="mb-4">{{ $cart->product->title }}</p>
@@ -34,10 +41,24 @@
                                                 LKR {{ number_format($cart->product->price, 2) }}
                                             </span>
                                         </td>
+                                        <td class="hidden text-center md:table-cell">
+                                            <span class="text-sm lg:text-base font-medium">
+                                                {{ $cart->order->payment_type }}
+                                            </span>
+                                        </td>
                                         <td class="text-center">
                                             <span
                                                 class="text-sm lg:text-base font-medium text-white bg-black px-4 py-0.5 rounded-full">
-                                                {{ $cart->order->status }}
+                                                @switch($cart->order->status)
+                                                    @case("waitPayment")
+                                                        waiting for payment
+                                                        @break
+                                                    @case("onTheWay")
+                                                        on the way
+                                                        @break
+                                                    @default
+                                                       {{ $cart->order->status}}
+                                                @endswitch
                                             </span>
                                         </td>
                                         <td class="text-center">

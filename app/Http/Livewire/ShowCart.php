@@ -11,8 +11,8 @@ class ShowCart extends Component
 {
     public $cartItems;
     public $user;
-    public $tax;
-    public $total;
+    public $tax = 100;
+    public $totalAmount;
     public $receiver;
     public $showModel = false;
     public $order_id = ''; // payhere callback param
@@ -38,8 +38,6 @@ class ShowCart extends Component
             ->orderBy('created_at', 'desc')
             ->get();
 
-        $this->tax = 100;
-        $this->total = 100;
         $this->receiver = [
             'name' => $this->user->name
         ];
@@ -60,11 +58,16 @@ class ShowCart extends Component
     {
         $this->validate();
 
+        foreach ($this->cartItems as $item) {
+            $this->totalAmount += $item->product->price;
+        }
+
         $order = new Order;
         $order->user_id = $this->user->id;
         $order->contact_name = $this->receiver['name'];
         $order->contact_phone = $this->receiver['contact'];
         $order->contact_address = $this->receiver['address'];
+        $order->total = $this->totalAmount;
         $order->payment_type = $type;
         $order->status = ($type === "cash") ? "processing" : "waitPayment";
         

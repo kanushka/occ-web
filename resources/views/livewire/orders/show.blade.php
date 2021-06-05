@@ -3,9 +3,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="mt-12">
                 <div class="px-4 sm:px-0">
-                    <h3 class="text-lg font-medium leading-6 text-gray-900 font-semibold">My Bag</h3>
+                    <h3 class="text-lg font-medium leading-6 text-gray-900 font-semibold">My Order #{{$order->id}}</h3>
                     <p class="mt-1 text-sm text-gray-600">
-                        Here is all products in your bag now.
+                        Here is all products which I have ordered previously.
                     </p>
                 </div>
             </div>
@@ -35,26 +35,14 @@
                                     <tr>
                                         <td>
                                             <a href="{{ route('product.show', $cartItem->product) }}">
-                                                <p class="mb-2 md:ml-4">{{ $cartItem->product->title }}</p>
+                                                <p class="mb-8 md:ml-4">{{ $cartItem->product->title }}</p>
                                             </a>
-                                            <button type="button" wire:click="removeItem({{ $cartItem->id }})"
-                                                class="text-red-500 hover:text-red-700 md:ml-4 mb-6">
-                                                <small>Remove item</small>
-                                            </button>
                                         </td>
                                         <td class="hidden text-right md:table-cell">
                                             <span class="text-sm lg:text-base font-medium">
                                                 1
                                             </span>
                                         </td>
-                                        {{-- <td class="justify-center md:justify-end md:flex mt-6">
-                                    <div class="w-20 h-10">
-                                        <div class="relative flex flex-row w-full h-8">
-                                            <input type="number" value="1"
-                                                class="w-full font-semibold text-center text-gray-700 bg-gray-200 outline-none focus:outline-none hover:text-black focus:text-black" />
-                                        </div>
-                                    </div>
-                                </td> --}}
                                         <td class="hidden text-right md:table-cell">
                                             <span class="text-sm lg:text-base font-medium">
                                                 {{ number_format($cartItem->product->price, 2) }}
@@ -68,7 +56,7 @@
                                     </tr>
                                 @endforeach
                             </tbody>
-                        </table>
+                        </table>                        
                         <hr class="pb-6 mt-6">
                         <div class="my-4 mt-6 -mx-2 lg:flex">
                             <div class="lg:px-2 lg:w-1/2">
@@ -84,9 +72,9 @@
                                         Receiver Name
                                     </label>
                                     <div class="mt-1 flex rounded-md shadow-sm">
-                                        <input type="text" name="name" id="name" wire:model="receiver.name"
+                                        <input type="text" name="name" id="name" readonly
                                             class="focus:ring-black focus:border-black flex-1 block w-full rounded-md sm:text-sm border-gray-300"
-                                            placeholder="Apple Home Designs">
+                                            value="{{$order->contact_name}}">
                                     </div>
                                     <x-input-error for="receiver.name" class="mt-2" />
 
@@ -94,9 +82,9 @@
                                         Contact Number
                                     </label>
                                     <div class="mt-1 flex rounded-md shadow-sm">
-                                        <input type="text" name="contact" id="contact" wire:model="receiver.contact"
-                                            class="focus:ring-black focus:border-black flex-1 block w-full rounded-md sm:text-sm border-gray-300"
-                                            placeholder="07X XXX XXXX">
+                                        <input type="text" name="contact" id="contact"
+                                            class="focus:ring-black focus:border-black flex-1 block w-full rounded-md sm:text-sm border-gray-300" readonly
+                                            value="{{$order->contact_phone}}">
                                     </div>
                                     <x-input-error for="receiver.contact" class="mt-2" />
 
@@ -104,8 +92,8 @@
                                         Delivery Address
                                     </label>
                                     <div class="mt-1">
-                                        <textarea id="address" name="address" rows="3" wire:model="receiver.address"
-                                            class="shadow-sm focus:ring-black focus:border-black mt-1 block w-full sm:text-sm border-gray-300 rounded-md"></textarea>
+                                        <textarea id="address" name="address" rows="3" readonly
+                                            class="shadow-sm focus:ring-black focus:border-black mt-1 block w-full sm:text-sm border-gray-300 rounded-md">{{$order->contact_address}}</textarea>
                                     </div>
                                     <x-input-error for="receiver.address" class="mt-2" />
 
@@ -146,9 +134,8 @@
                                         <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">
                                             LKR {{ number_format($total + $tax, 2) }}
                                         </div>
-                                        <input type="hidden" wire:model="totalAmount" value="{{ $total + $tax }}">
                                     </div>
-                                    <div class="flex justify-end mt-8">
+                                    {{-- <div class="flex justify-end mt-8">
                                         <button type="button" wire:click="makeOrder('cash')"
                                             class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black">
                                             Cash on Delivery
@@ -157,7 +144,7 @@
                                             class="inline-flex justify-center ml-4 py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black">
                                             Pay Now
                                         </button>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -171,7 +158,7 @@
         </div>
     </div>
 
-    @if ($showModel)
+    @if ($total !== $order->total)
         <div class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
             <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                 <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
@@ -185,12 +172,11 @@
                         <div class="sm:flex sm:items-start">
                             <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                                 <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-                                    Congratulations!
+                                    Opps!
                                 </h3>
                                 <div class="mt-2">
                                     <p class="text-sm text-gray-500">
-                                        You have successfully place your order. We will contact you soon with your
-                                        products.
+                                        Something wrong with order information. Please contact our assistant.
                                     </p>
                                 </div>
                             </div>
@@ -199,7 +185,7 @@
                     <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                         <button type="button"
                             class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-                            onclick="location.href=`{{ route('products') }}`">
+                            onclick="location.href=`{{ route('orders') }}`">
                             Close
                         </button>
                     </div>
