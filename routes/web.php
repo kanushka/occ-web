@@ -7,6 +7,7 @@ use App\Http\Livewire\Products\Show as ShowProduct;
 use App\Http\Livewire\Products\Create as CreateProduct;
 use App\Http\Livewire\Products\Edit as EditProduct;
 use App\Http\Livewire\ShowCart;
+use App\Http\Livewire\Categories\ShowList as ShowCategories;
 use App\Http\Livewire\Orders\ShowList as ShowOrders;
 use App\Http\Livewire\Orders\Show as ShowOrder;
 use App\Http\Livewire\Orders\Checkout as CheckoutOrder;
@@ -42,6 +43,10 @@ Route::get('/products/{product}/edit', EditProduct::class)
 Route::get('/products/bag', ShowCart::class)
     ->middleware('auth')
     ->name('cart.show');
+
+Route::get('/products/categories', ShowCategories::class)
+    ->middleware(['auth', 'can:create,App\Models\Product'])
+    ->name('categories');
 
 Route::get('/orders', ShowOrders::class)
     ->middleware('auth')

@@ -3,7 +3,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="mt-12">
                 <div class="px-4 sm:px-0">
-                    <h3 class="text-lg font-medium leading-6 text-gray-900 font-semibold">My Order #{{$order->id}}</h3>
+                    <h3 class="text-lg font-medium leading-6 text-gray-900 font-semibold">My Order #{{ $order->id }}
+                    </h3>
                     <p class="mt-1 text-sm text-gray-600">
                         Here is all products which I have ordered previously.
                     </p>
@@ -56,7 +57,7 @@
                                     </tr>
                                 @endforeach
                             </tbody>
-                        </table>                        
+                        </table>
                         <hr class="pb-6 mt-6">
                         <div class="my-4 mt-6 -mx-2 lg:flex">
                             <div class="lg:px-2 lg:w-1/2">
@@ -74,7 +75,7 @@
                                     <div class="mt-1 flex rounded-md shadow-sm">
                                         <input type="text" name="name" id="name" readonly
                                             class="focus:ring-black focus:border-black flex-1 block w-full rounded-md sm:text-sm border-gray-300"
-                                            value="{{$order->contact_name}}">
+                                            value="{{ $order->contact_name }}">
                                     </div>
                                     <x-input-error for="receiver.name" class="mt-2" />
 
@@ -83,8 +84,8 @@
                                     </label>
                                     <div class="mt-1 flex rounded-md shadow-sm">
                                         <input type="text" name="contact" id="contact"
-                                            class="focus:ring-black focus:border-black flex-1 block w-full rounded-md sm:text-sm border-gray-300" readonly
-                                            value="{{$order->contact_phone}}">
+                                            class="focus:ring-black focus:border-black flex-1 block w-full rounded-md sm:text-sm border-gray-300"
+                                            readonly value="{{ $order->contact_phone }}">
                                     </div>
                                     <x-input-error for="receiver.contact" class="mt-2" />
 
@@ -93,7 +94,7 @@
                                     </label>
                                     <div class="mt-1">
                                         <textarea id="address" name="address" rows="3" readonly
-                                            class="shadow-sm focus:ring-black focus:border-black mt-1 block w-full sm:text-sm border-gray-300 rounded-md">{{$order->contact_address}}</textarea>
+                                            class="shadow-sm focus:ring-black focus:border-black mt-1 block w-full sm:text-sm border-gray-300 rounded-md">{{ $order->contact_address }}</textarea>
                                     </div>
                                     <x-input-error for="receiver.address" class="mt-2" />
 
@@ -145,6 +146,21 @@
                                             Pay Now
                                         </button>
                                     </div> --}}
+                                    <div class="flex justify-end mt-8">
+                                        <span
+                                            class="text-sm lg:text-base font-medium text-white bg-black px-4 py-0.5 rounded-full">
+                                            @switch($order->status)
+                                                @case(" waitPayment")
+                                                    waiting for payment
+                                                @break
+                                                @case(" onTheWay")
+                                                    on the way
+                                                @break
+                                                @default
+                                                    {{ $order->status }}
+                                            @endswitch
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

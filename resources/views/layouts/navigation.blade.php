@@ -17,7 +17,8 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('hardware', ['type'=>'hardware'])" :active="request()->routeIs('hardware')">
+                    <x-nav-link :href="route('hardware', ['type'=>'hardware'])"
+                        :active="request()->routeIs('hardware')">
                         Hardware Items
                     </x-nav-link>
                 </div>
@@ -40,7 +41,7 @@
             @auth
 
                 <div class="hidden sm:flex sm:items-center sm:ml-6">
-                        @livewire('cart-badge')
+                    @livewire('cart-badge')
                     <div class="w-6 ml-1 mr-6">
                         <a href="{{ route('cart.show') }}">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
@@ -72,16 +73,20 @@
                                 <x-dropdown-link :href="route('product.create')">
                                     Add Product
                                 </x-dropdown-link>
-                                @endcan
-                                <x-dropdown-link :href="route('orders')">
-                                    My Orders
+                                <x-dropdown-link :href="route('categories')">
+                                    Manage Category
                                 </x-dropdown-link>
+                            @endcan
+                            <x-dropdown-link :href="route('orders')">
+                                My Orders
+                            </x-dropdown-link>
+                            <hr>
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
 
                                 <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
-                                                            this.closest('form').submit();">
+                                                                this.closest('form').submit();">
                                     {{ __('Log Out') }}
                                 </x-dropdown-link>
                             </form>
@@ -149,7 +154,7 @@
                         @csrf
 
                         <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
-                                                    this.closest('form').submit();">
+                                                        this.closest('form').submit();">
                             {{ __('Log Out') }}
                         </x-responsive-nav-link>
                     </form>

@@ -11,8 +11,8 @@
             </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-4">
                 @if (count($carts) > 0)
-                    <div class="p-20">
-                        <table class="w-full font-medium leading-6 text-gray-900 font-semibold" cellspacing="0">
+                    <div class="p-12">
+                        <table class="w-full font-medium leading-6 text-gray-900 font-semibold divide-y divide-gray-200" cellspacing="0">
                             <thead>
                                 <tr class="h-12">
                                     <th class="text-left">Order Id</th>
@@ -21,11 +21,12 @@
                                     <th class="text-center">Method</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Ordered at</th>
+                                    <th class="text-center"></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($carts as $cart)
-                                    <tr>
+                                    <tr class="h-12">
                                         <td>
                                             <a href="{{ route('orders.show', $cart->order->id) }}">
                                                 <p class="mb-4">#{{ $cart->order->id }}</p>
@@ -50,14 +51,14 @@
                                             <span
                                                 class="text-sm lg:text-base font-medium text-white bg-black px-4 py-0.5 rounded-full">
                                                 @switch($cart->order->status)
-                                                    @case("waitPayment")
+                                                    @case(" waitPayment")
                                                         waiting for payment
-                                                        @break
-                                                    @case("onTheWay")
+                                                    @break
+                                                    @case(" onTheWay")
                                                         on the way
-                                                        @break
+                                                    @break
                                                     @default
-                                                       {{ $cart->order->status}}
+                                                        {{ $cart->order->status }}
                                                 @endswitch
                                             </span>
                                         </td>
@@ -66,11 +67,14 @@
                                                 {{ $cart->order->created_at }}
                                             </span>
                                         </td>
+                                        <td class="text-center">
+                                            <a href="{{ route('orders.show', $cart->order->id) }}" class="text-indigo-600 hover:text-indigo-900">View</a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
-
+                        {{ $carts->links() }}
                     </div>
                 @else
                     <div class="p-20 text-center">
