@@ -8,6 +8,9 @@ use App\Http\Livewire\Products\Create as CreateProduct;
 use App\Http\Livewire\Products\Edit as EditProduct;
 use App\Http\Livewire\ShowCart;
 use App\Http\Livewire\Orders\ShowList as ShowOrders;
+use App\Http\Livewire\Orders\Checkout as CheckoutOrder;
+use App\Http\Livewire\Orders\Callback as PaymentCallback;
+use App\Http\Controllers\PaymentNotifyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,5 +45,12 @@ Route::get('/products/bag', ShowCart::class)
 Route::get('/orders', ShowOrders::class)
     ->middleware('auth')
     ->name('orders');
+
+Route::get('/orders/{order}/checkout', CheckoutOrder::class)
+    ->middleware('auth')
+    ->name('orders.checkout');
+
+Route::get('/orders/{order}/checkout/notify', PaymentNotifyController::class)
+    ->name('orders.notify');
 
 require __DIR__.'/auth.php';

@@ -15,6 +15,11 @@ class ShowCart extends Component
     public $total;
     public $receiver;
     public $showModel = false;
+    public $order_id = ''; // payhere callback param
+
+    protected $queryString = [
+        'order_id' => ['except' => ''],
+    ];
 
     protected $listeners = ['cartUpdated' => 'mount'];
 
@@ -38,6 +43,10 @@ class ShowCart extends Component
         $this->receiver = [
             'name' => $this->user->name
         ];
+
+        if($this->order_id !== ''){
+            $this->showModel = true;
+        }
     }
 
     public function removeItem($cardItemId)
@@ -47,7 +56,7 @@ class ShowCart extends Component
         $this->emit('orderPlaced');
     }
 
-    public function makeOrder()
+    public function makeOrder($type="cash")
     {
         $this->validate();
 
@@ -56,12 +65,19 @@ class ShowCart extends Component
         $order->contact_name = $this->receiver['name'];
         $order->contact_phone = $this->receiver['contact'];
         $order->contact_address = $this->receiver['address'];
-        $order->paid_at = now();
+        $order->payment_type = $type;
+        $order->status = ($type === "cash") ? "processing" : "waitPayment";
+        
         $order->save();
 
         foreach ($this->cartItems as $key => $cart) {
             $cart->order_id = $order->id;
             $cart->save();
+        }
+
+        if($type === "card"){
+            // init payhere checkout flow
+            return redirect()->route('orders.checkout', $order);
         }
 
         $this->showModel = true;

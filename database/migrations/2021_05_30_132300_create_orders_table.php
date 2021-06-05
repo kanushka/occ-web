@@ -20,8 +20,9 @@ class CreateOrdersTable extends Migration
             $table->string('contact_name');
             $table->string('contact_phone');
             $table->text('contact_address');
-            $table->dateTime('paid_at');
-            $table->enum('status', ['processing', 'onTheWay', 'delivered', 'closed']);
+            $table->enum('payment_type', ['cash', 'card']);
+            $table->dateTime('paid_at')->nullable();
+            $table->enum('status', ['waitPayment', 'processing', 'onTheWay', 'delivered', 'closed']);
             $table->timestamps();
         });
     }
