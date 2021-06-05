@@ -12,7 +12,7 @@
             </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-4">
                 @if (count($cartItems) > 0)
-                    <div class="p-20">
+                    <div class="p-12">
                         <table class="w-full font-medium leading-6 text-gray-900 font-semibold" cellspacing="0">
                             <thead>
                                 <tr class="h-12">
@@ -136,24 +136,14 @@
                                             LKR {{ number_format($total + $tax, 2) }}
                                         </div>
                                     </div>
-                                    {{-- <div class="flex justify-end mt-8">
-                                        <button type="button" wire:click="makeOrder('cash')"
-                                            class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black">
-                                            Cash on Delivery
-                                        </button>
-                                        <button type="button" wire:click="makeOrder('card')"
-                                            class="inline-flex justify-center ml-4 py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black">
-                                            Pay Now
-                                        </button>
-                                    </div> --}}
                                     <div class="flex justify-end mt-8">
                                         <span
                                             class="text-sm lg:text-base font-medium text-white bg-black px-4 py-0.5 rounded-full">
                                             @switch($order->status)
-                                                @case(" waitPayment")
+                                                @case("waitPayment")
                                                     waiting for payment
                                                 @break
-                                                @case(" onTheWay")
+                                                @case("onTheWay")
                                                     on the way
                                                 @break
                                                 @default
@@ -164,6 +154,8 @@
                                 </div>
                             </div>
                         </div>
+                        <hr class="pb-6 mt-6">
+                        @livewire('orders.process', ['order' => $order])
                     </div>
                 @else
                     <div class="p-20 text-center">

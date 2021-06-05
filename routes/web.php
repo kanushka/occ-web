@@ -45,7 +45,7 @@ Route::get('/products/bag', ShowCart::class)
     ->name('cart.show');
 
 Route::get('/products/categories', ShowCategories::class)
-    ->middleware(['auth', 'can:create,App\Models\Product'])
+    ->middleware(['auth', 'can:create,App\Models\ProductCategory'])
     ->name('categories');
 
 Route::get('/orders', ShowOrders::class)

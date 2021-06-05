@@ -25,7 +25,7 @@ class ShowList extends Component
 
     public function showEdit(ProductCategory $category)
     {
-        $this->authorize('create', Product::class);
+        $this->authorize('create', ProductCategory::class);
 
         $this->category = $category;
         $this->modelTitle = "Update category {$category->title}";
@@ -34,7 +34,7 @@ class ShowList extends Component
 
     public function showNew()
     {
-        $this->authorize('create', Product::class);
+        $this->authorize('create', ProductCategory::class);
 
         $this->category = new ProductCategory;
         $this->category->type = "plan";

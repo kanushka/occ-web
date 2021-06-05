@@ -26,6 +26,7 @@ class Create extends Component
     public function mount()
     {
         $this->product = new Product;
+        $this->product->product_category_id = 21; // set first category
     }
 
     public function save()

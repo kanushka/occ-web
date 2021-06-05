@@ -51,10 +51,10 @@
                                             <span
                                                 class="text-sm lg:text-base font-medium text-white bg-black px-4 py-0.5 rounded-full">
                                                 @switch($cart->order->status)
-                                                    @case(" waitPayment")
+                                                    @case("waitPayment")
                                                         waiting for payment
                                                     @break
-                                                    @case(" onTheWay")
+                                                    @case("onTheWay")
                                                         on the way
                                                     @break
                                                     @default

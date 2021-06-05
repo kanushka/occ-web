@@ -16,6 +16,7 @@ class PaymentNotifyController extends Controller
      */
     public function __invoke(Request $request, Order $order)
     {
+        error_log('PaymentNotifyController : ' . json_encode($request));
         Log::debug('PaymentNotifyController : ' . json_encode($request));
         Log::debug('order : ' . json_encode($order));
 
@@ -33,6 +34,7 @@ class PaymentNotifyController extends Controller
 
         if (($localMd5sig === $md5sig) && ($statusCode == 2) && ($orderId == $order->id)) {
             // payment success
+            error_log('PaymentNotifyController : payment verification success');
             Log::debug('PaymentNotifyController : payment verification success');
 
             $order->payments()->create([
@@ -45,6 +47,7 @@ class PaymentNotifyController extends Controller
             Log::debug('PaymentNotifyController : order updated');
         }
 
+        error_log('PaymentNotifyController : End');
         Log::debug('PaymentNotifyController : End');
     }
 }
