@@ -14,11 +14,11 @@ class ShowList extends Component
     public function render()
     {
         return view('livewire.orders.show-list', [
-            'carts' => Cart::with('product', 'order')
+            'cartItems' => Cart::with('product', 'order')
                 ->where('user_id', Auth::id())
                 ->whereNotNull('order_id')
                 ->orderBy('created_at', 'desc')
-                ->paginate(10)
+                ->paginate(10),
         ])->layout('layouts.app');
     }
 }

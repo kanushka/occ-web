@@ -44,6 +44,12 @@ class OrderPolicy
         //
     }
 
+
+    public function manage(User $user)
+    {
+        return $user->isAdministrator();
+    }
+
     /**
      * Determine whether the user can update the model.
      *

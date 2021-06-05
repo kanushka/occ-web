@@ -12,7 +12,7 @@
             <div class="mt-5">
                 <form wire:submit.prevent="update">
                     <div class="shadow sm:rounded-md sm:overflow-hidden">
-                        <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
+                        <div class="p-12 bg-white space-y-6 sm:p-6">
                             <div class="grid grid-cols-3 gap-6">
                                 <div class="col-span-3 sm:col-span-2">
                                     <label for="title" class="block text-sm font-medium text-gray-700">

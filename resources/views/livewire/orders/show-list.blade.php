@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-4">
-                @if (count($carts) > 0)
+                @if (count($cartItems) > 0)
                     <div class="p-12">
                         <table class="w-full font-medium leading-6 text-gray-900 font-semibold divide-y divide-gray-200" cellspacing="0">
                             <thead>
@@ -25,32 +25,32 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($carts as $cart)
+                                @foreach ($cartItems as $item)
                                     <tr class="h-12">
                                         <td>
-                                            <a href="{{ route('orders.show', $cart->order->id) }}">
-                                                <p class="mb-4">#{{ $cart->order->id }}</p>
+                                            <a href="{{ route('orders.show', $item->order->id) }}">
+                                                <p class="mb-4">#{{ $item->order->id }}</p>
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="{{ route('product.show', $cart->product_id) }}">
-                                                <p class="mb-4">{{ $cart->product->title }}</p>
+                                            <a href="{{ route('product.show', $item->product_id) }}">
+                                                <p class="mb-4">{{ $item->product->title }}</p>
                                             </a>
                                         </td>
                                         <td class="hidden text-right md:table-cell">
                                             <span class="text-sm lg:text-base font-medium">
-                                                LKR {{ number_format($cart->product->price, 2) }}
+                                                LKR {{ number_format($item->product->price, 2) }}
                                             </span>
                                         </td>
                                         <td class="hidden text-center md:table-cell">
                                             <span class="text-sm lg:text-base font-medium">
-                                                {{ $cart->order->payment_type }}
+                                                {{ $item->order->payment_type }}
                                             </span>
                                         </td>
                                         <td class="text-center">
                                             <span
                                                 class="text-sm lg:text-base font-medium text-white bg-black px-4 py-0.5 rounded-full">
-                                                @switch($cart->order->status)
+                                                @switch($item->order->status)
                                                     @case("waitPayment")
                                                         waiting for payment
                                                     @break
@@ -58,23 +58,23 @@
                                                         on the way
                                                     @break
                                                     @default
-                                                        {{ $cart->order->status }}
+                                                        {{ $item->order->status }}
                                                 @endswitch
                                             </span>
                                         </td>
                                         <td class="text-center">
                                             <span class="text-sm lg:text-base font-medium">
-                                                {{ $cart->order->created_at }}
+                                                {{ $item->order->created_at }}
                                             </span>
                                         </td>
                                         <td class="text-center">
-                                            <a href="{{ route('orders.show', $cart->order->id) }}" class="text-indigo-600 hover:text-indigo-900">View</a>
+                                            <a href="{{ route('orders.show', $item->order->id) }}" class="text-indigo-600 hover:text-indigo-900">View</a>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                        {{ $carts->links() }}
+                        {{ $cartItems->links() }}
                     </div>
                 @else
                     <div class="p-20 text-center">

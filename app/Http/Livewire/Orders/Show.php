@@ -14,6 +14,8 @@ class Show extends Component
     public $user;
     public $tax = 100;
 
+    protected $listeners = ['orderUpdated' => 'mount'];
+
     public function mount(Order $order)
     {
         $this->user = Auth::user();

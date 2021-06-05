@@ -154,8 +154,10 @@
                                 </div>
                             </div>
                         </div>
+                        @can('update', $order)                            
                         <hr class="pb-6 mt-6">
                         @livewire('orders.process', ['order' => $order])
+                        @endcan
                     </div>
                 @else
                     <div class="p-20 text-center">

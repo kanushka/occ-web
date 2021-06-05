@@ -71,11 +71,15 @@
                         <x-slot name="content">
                             @can('create', App\Models\Product::class)
                                 <x-dropdown-link :href="route('product.create')">
-                                    Add Product
+                                    Manage Products
                                 </x-dropdown-link>
                                 <x-dropdown-link :href="route('categories')">
-                                    Manage Category
+                                    Manage Categories
                                 </x-dropdown-link>
+                                <x-dropdown-link :href="route('orders.manage')">
+                                    Manage Orders
+                                </x-dropdown-link>
+                                <hr>
                             @endcan
                             <x-dropdown-link :href="route('orders')">
                                 My Orders

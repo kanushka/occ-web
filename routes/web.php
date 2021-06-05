@@ -9,6 +9,7 @@ use App\Http\Livewire\Products\Edit as EditProduct;
 use App\Http\Livewire\ShowCart;
 use App\Http\Livewire\Categories\ShowList as ShowCategories;
 use App\Http\Livewire\Orders\ShowList as ShowOrders;
+use App\Http\Livewire\Orders\Manage as ManageOrders;
 use App\Http\Livewire\Orders\Show as ShowOrder;
 use App\Http\Livewire\Orders\Checkout as CheckoutOrder;
 use App\Http\Livewire\Orders\Callback as PaymentCallback;
@@ -51,6 +52,10 @@ Route::get('/products/categories', ShowCategories::class)
 Route::get('/orders', ShowOrders::class)
     ->middleware('auth')
     ->name('orders');
+
+Route::get('/manage/orders', ManageOrders::class)
+    ->middleware(['auth', 'can:manage,App\Models\Order'])
+    ->name('orders.manage');
 
 Route::get('/orders/{order}', ShowOrder::class)
     ->middleware('auth')
