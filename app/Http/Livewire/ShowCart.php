@@ -3,9 +3,11 @@
 namespace App\Http\Livewire;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 use App\Models\Cart;
 use App\Models\Order;
+use App\Mail\OrderPlaced;
 
 class ShowCart extends Component
 {
@@ -84,6 +86,7 @@ class ShowCart extends Component
         }
 
         $this->showModel = true;
+        Mail::to($this->user)->send(new OrderPlaced($order, $this->user));
         $this->emit('cartUpdated');
     }
 

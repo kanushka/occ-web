@@ -6,7 +6,8 @@
                 <div class="text-5xl font-semibold mt-4">We Build Your Dream Home</div>
             </div>
             <div class="h-80 absolute top-20 right-64">
-                <iframe class="h-80" src="https://lottiefiles.com/iframe/64186-3x3-cubes-loader-1"></iframe>
+                {{-- <iframe class="h-80" src="https://lottiefiles.com/iframe/64186-3x3-cubes-loader-1"></iframe> --}}
+                <iframe class="h-80" src="https://embed.lottiefiles.com/animation/59875"></iframe>
             </div>
         </div>
 
