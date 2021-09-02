@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Products;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Product;
 use App\Models\ProductCategory;
 
@@ -40,9 +41,9 @@ class Edit extends Component
 
         // store images
         foreach ($this->photos as $photo) {
-            $path = $photo->store('photos', 'public');
+            $path = $photo->storePublicly('products', 's3');
             $this->product->images()->create([
-                'url' => $path,
+                'url' =>  Storage::disk('s3')->url($path),
             ]);
         }
 

@@ -18,9 +18,9 @@ class Show extends Component
     {
         $this->product = $product;
         // get public image urls
-        $this->defaultImage = count($product->images)>0 ? Storage::url($product->images[0]->url): "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0BIERmNWpySk3SSyc_Zk5MizYrAQpV38sliNkPCO7m-glxdGBfSrmE6wka7Q44l7moC0&usqp=CAU";
-        $this->secondImage = count($product->images)>1 ? Storage::url($product->images[1]->url): null;
-        $this->thirdImage = count($product->images)>2 ? Storage::url($product->images[2]->url): null;
+        $this->defaultImage = count($product->images)>0 ? $product->images[0]->url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0BIERmNWpySk3SSyc_Zk5MizYrAQpV38sliNkPCO7m-glxdGBfSrmE6wka7Q44l7moC0&usqp=CAU";
+        $this->secondImage = count($product->images)>1 ? $product->images[1]->url: null;
+        $this->thirdImage = count($product->images)>2 ? $product->images[2]->url: null;
     }
 
     public function editProduct()
